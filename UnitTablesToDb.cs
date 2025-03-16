@@ -5,19 +5,19 @@ using Microsoft.VisualBasic;
 public class UnitTablesToDb
 {
 
-        public UnitTablesToDb(string filePath, string connectionString)
+        public UnitTablesToDb(string filePath, string connectionString, string tableName)
         {
                 try{
                         ReadCSV csv = new ReadCSV(filePath);
                         string[] header = csv.content.First();
-                        // header contains column names
+			// header contains column names
 
-                        CreateUnitTable(header, connectionString);
+			            CreateTable(header, connectionString, tableName);
                         
                         string[][] body = csv.content.Where((a,b) => b != 0).ToArray();
                         // body contains values 
                         
-                        FillUnitTable(body, connectionString);
+                        FillTable(body, connectionString, tableName);
                 }
                 catch(Exception e)
                 {
@@ -27,9 +27,9 @@ public class UnitTablesToDb
 
         }
 
-        public void CreateUnitTable(string[] header, string connectionString)
+        public void CreateTable(string[] header, string connectionString, string tableName)
         {
-                string createQueryDb = "CREATE TABLE land_units_tables (" 
+                string createQueryDb = $"CREATE TABLE {tableName} (" 
                                         + "[Id] [int] IDENTITY(1,1) PRIMARY KEY NOT NULL, ";
 
                 for(int i = 0; i < header.Length; i++)
@@ -87,19 +87,19 @@ public class UnitTablesToDb
                 }
         }
 
-        public void FillUnitTable(string[][] body, string connectionString)
+        public void FillTable(string[][] body, string connectionString, string tableName)
         {
                 foreach(string[] line in body)
                 {
                         string unitKey = line[0];
-                        string insertRowQuery = "INSERT INTO [dbo].[land_units_tables] VALUES ( '";
+                        string insertRowQuery = $"INSERT INTO [dbo].[{tableName}] VALUES ( '";
                         for(int i = 0; i < line.Length - 1; i++)
                         {
                                 string entry = line[i];
                                 insertRowQuery = insertRowQuery + entry + "','";
                         }
                         insertRowQuery = insertRowQuery + line[line.Length - 1] + "');";
-                        insertRowQuery = "IF NOT EXISTS (SELECT 1 FROM [dbo].[land_units_tables] WHERE [key] = '" 
+                        insertRowQuery = $"IF NOT EXISTS (SELECT 1 FROM [dbo].[{tableName}] WHERE [key] = '" 
                                         + unitKey + "')" + insertRowQuery;
 
                         //Test

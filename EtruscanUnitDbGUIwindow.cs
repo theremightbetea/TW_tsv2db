@@ -9,6 +9,7 @@ public partial class EtruscanUnitDbGUIwindow : Form
 public string serverName;
 public string dbName;
 public string dataSourceName;
+public string tableName;
 public string filePath;
 public EtruscanUnitDbGUIwindow()
     {
@@ -20,7 +21,7 @@ public EtruscanUnitDbGUIwindow()
     {
         Button browseButton = new Button();
         browseButton.Location = new Point(10, 10);
-	browseButton.AutoSize = true;
+		browseButton.AutoSize = true;
         browseButton.Text = "Select your tsv-file";
         this.Controls.Add(browseButton);
 	//browseButton.Size = ;
@@ -33,7 +34,7 @@ public EtruscanUnitDbGUIwindow()
 
 	Label ErrorLabel = new Label();
 	ErrorLabel.AutoSize = true;
-	ErrorLabel.Location = new Point(10, 170);
+	ErrorLabel.Location = new Point(10, 210);
 	this.Controls.Add(ErrorLabel);
 
 	List<TextBox> textBoxes = new List<TextBox>();
@@ -66,8 +67,8 @@ public EtruscanUnitDbGUIwindow()
 	};
 	*/
 
-        TextBox enterDbName = new TextBox();
-	enterDbName.Location = new Point(10,110);
+    TextBox enterDbName = new TextBox();
+	enterDbName.Location = new Point(10, 120);
 	enterDbName.Size = new Size(200,10);
 	string enterDbNameText = "Enter the name of your database";
 	enterDbName.Text = enterDbNameText;
@@ -118,40 +119,68 @@ public EtruscanUnitDbGUIwindow()
 		}
 	};
 
-        Button etrDbButton = new Button();
-		etrDbButton.Location = new Point(10, 140);
-		etrDbButton.AutoSize = true;
-		etrDbButton.Text = "Insert the contents of your tsv-file into the database";
+	TextBox enterTableName = new TextBox();
+	enterTableName.Location = new Point(10, 160);
+	enterTableName.Size = new Size(200, 10);
+	string enterTableNameText = "Enter the name of your table";
+	enterTableName.Text = enterTableNameText;
+	enterTableName.ForeColor = Color.LightGray;
+	textBoxes.Add(enterTableName);
 
-        browseButton.Click += (sender, args) => 
+		enterTableName.Enter += (sender, args) =>
+	{
+		if (enterTableName.Text == enterTableNameText)
+		{
+			enterTableName.Text = "";
+			enterTableName.ForeColor = Color.Black;
+		}
+	};
+
+		enterTableName.Leave += (sender, args) =>
+	{
+		if (enterTableName.Text == enterTableNameText || String.IsNullOrEmpty(enterTableName.Text))
+		{
+			enterTableName.Text = enterTableNameText;
+			enterTableName.ForeColor = Color.LightGray;
+		}
+	};
+
+	Button etrDbButton = new Button();
+	etrDbButton.Location = new Point(10, 200);
+	etrDbButton.AutoSize = true;
+	etrDbButton.Text = "Insert the contents of your tsv-file into the database";
+
+    browseButton.Click += (sender, args) => 
+    {
+        var FileSelection = new OpenFileDialog();
+        FileSelection.Title = "Select your tsv";
+        FileSelection.DefaultExt = "tsv";
+        FileSelection.Filter = "*.tsv |*.tsv";
+        //DialogResult dR = FileSelection.ShowDialog();
+        if(FileSelection.ShowDialog() == DialogResult.OK)
         {
-            var FileSelection = new OpenFileDialog();
-            FileSelection.Title = "Select your tsv";
-            FileSelection.DefaultExt = "tsv";
-            FileSelection.Filter = "*.tsv |*.tsv";
-            //DialogResult dR = FileSelection.ShowDialog();
-            if(FileSelection.ShowDialog() == DialogResult.OK)
-            {
-                filePath = FileSelection.FileName;
-                //Console.WriteLine(filePath);
-                selectedFileLable.Text = "Selected file:";
-                Label pathLabel = new Label();
-                pathLabel.AutoSize = true;
-                pathLabel.Text = filePath;
-                pathLabel.Location = new Point(10, 60);
-                this.Controls.Add(pathLabel);
-                this.Controls.Add(etrDbButton);
-		//this.Controls.Add(enterServerName);
-		this.Controls.Add(enterDbName);
-		this.Controls.Add(enterDataSourceName);
-            }
-        };
+            filePath = FileSelection.FileName;
+            //Console.WriteLine(filePath);
+            selectedFileLable.Text = "Selected file:";
+            Label pathLabel = new Label();
+            pathLabel.AutoSize = true;
+            pathLabel.Text = filePath;
+            pathLabel.Location = new Point(10, 60);
+            this.Controls.Add(pathLabel);
+            this.Controls.Add(etrDbButton);
+	//this.Controls.Add(enterServerName);
+	this.Controls.Add(enterDbName);
+	this.Controls.Add(enterDataSourceName);
+	this.Controls.Add(enterTableName);
+        }
+    };
 
 	etrDbButton.Click += (sender, args) =>
 	{
 		//serverName = enterServerName.Text;
 		dbName = enterDbName.Text;
 		dataSourceName = enterDataSourceName.Text;
+		tableName = enterTableName.Text;
 		/*
 		Console.WriteLine(serverName);
 		Console.WriteLine(dbName);
@@ -159,11 +188,11 @@ public EtruscanUnitDbGUIwindow()
 		*/
 		string connectionString = @"data source=" + dataSourceName + ";initial catalog=" + dbName + ";trusted_connection=true;MultipleActiveResultSets=True";
 		bool incInput = false;
-		if(dbName != enterDbNameText && dataSourceName != enterDataSourceNameText)
+		if(dbName != enterDbNameText && dataSourceName != enterDataSourceNameText && tableName != enterTableNameText)
 		{
 			try
 			{
-				var run = new UnitTablesToDb(filePath, connectionString);
+				var run = new UnitTablesToDb(filePath, connectionString, tableName);
 			}
 			catch(Exception e)
 			{
@@ -171,7 +200,7 @@ public EtruscanUnitDbGUIwindow()
 				ErrorLabel.Text = "Incorrect input!";
 			}
 		}
-		else if(String.IsNullOrEmpty(dbName) || String.IsNullOrEmpty(dataSourceName) || dbName == enterDbNameText || dataSourceName == enterDataSourceNameText)
+		else if(String.IsNullOrEmpty(dbName) || String.IsNullOrEmpty(dataSourceName) || dbName == enterDbNameText || dataSourceName == enterDataSourceNameText || tableName == enterTableNameText)
 		{
 			ErrorLabel.Text = "Insufficient input!";
 		}

@@ -18,9 +18,7 @@ D:\Desktop\Uni\Eigene Projekte\TW_tsv2db\obj\Debug\net7.0-windows\EtruscanUnitDb
 D:\Desktop\Uni\Eigene Projekte\TW_tsv2db\obj\Debug\net7.0-windows\EtruscanUnitDbGUI.AssemblyInfoInputs.cache
 D:\Desktop\Uni\Eigene Projekte\TW_tsv2db\obj\Debug\net7.0-windows\EtruscanUnitDbGUI.AssemblyInfo.cs
 D:\Desktop\Uni\Eigene Projekte\TW_tsv2db\obj\Debug\net7.0-windows\EtruscanUnitDbGUI.csproj.CoreCompileInputs.cache
-D:\Desktop\Uni\Eigene Projekte\TW_tsv2db\obj\Debug\net7.0-windows\EtruscanUnitDbGUI.dll
-D:\Desktop\Uni\Eigene Projekte\TW_tsv2db\obj\Debug\net7.0-windows\refint\EtruscanUnitDbGUI.dll
-D:\Desktop\Uni\Eigene Projekte\TW_tsv2db\obj\Debug\net7.0-windows\EtruscanUnitDbGUI.pdb
+D:\Desktop\Uni\Eigene Projekte\TW_tsv2db\obj\Debug\net7.0-windows\EtruscanUnitDbGUI.sourcelink.json
 D:\Desktop\Uni\Eigene Projekte\TW_tsv2db\bin\Debug\net7.0-windows\EtruscanUnitDbGUI.exe
 D:\Desktop\Uni\Eigene Projekte\TW_tsv2db\bin\Debug\net7.0-windows\EtruscanUnitDbGUI.deps.json
 D:\Desktop\Uni\Eigene Projekte\TW_tsv2db\bin\Debug\net7.0-windows\EtruscanUnitDbGUI.runtimeconfig.json
@@ -33,5 +31,8 @@ D:\Desktop\Uni\Eigene Projekte\TW_tsv2db\bin\Debug\net7.0-windows\runtimes\win-x
 D:\Desktop\Uni\Eigene Projekte\TW_tsv2db\bin\Debug\net7.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\Desktop\Uni\Eigene Projekte\TW_tsv2db\bin\Debug\net7.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\Desktop\Uni\Eigene Projekte\TW_tsv2db\obj\Debug\net7.0-windows\Etruscan.DA26BE61.Up2Date
+D:\Desktop\Uni\Eigene Projekte\TW_tsv2db\obj\Debug\net7.0-windows\EtruscanUnitDbGUI.dll
+D:\Desktop\Uni\Eigene Projekte\TW_tsv2db\obj\Debug\net7.0-windows\refint\EtruscanUnitDbGUI.dll
+D:\Desktop\Uni\Eigene Projekte\TW_tsv2db\obj\Debug\net7.0-windows\EtruscanUnitDbGUI.pdb
 D:\Desktop\Uni\Eigene Projekte\TW_tsv2db\obj\Debug\net7.0-windows\EtruscanUnitDbGUI.genruntimeconfig.cache
 D:\Desktop\Uni\Eigene Projekte\TW_tsv2db\obj\Debug\net7.0-windows\ref\EtruscanUnitDbGUI.dll
